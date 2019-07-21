@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>toSaas 使用帮助-旧系统改造</title>
+<meta content="tosaas" name="generator" />
+<meta content="开源 saas 多租户 开发框架,系统架构,saas转化,负载均衡,大数据,高并发" name="keywords" />
+<meta content="轻松快速地把您的传统单用户应用转化成saas模式的系统，支持千万级用户高并发大数据。" name="description" />
+
+    <link href="css/css.css" rel="stylesheet">
+
+    <link href="css/css2.css" rel="stylesheet">
+    <script src="js/jquery-1.11.0.min.js"></script>
+
+    <style type="text/css">
+        .style1
+        {
+            font-size: xx-large;
+        }
+        #token
+        {
+            width: 265px;
+        }
+    </style>
+
+
+</head>
+<body>
+
+    <p>
+        <table style="width:400px"><tr><td>
+        &nbsp;<a href="index.html"> 1.系统初始化</a>
+        </td><td>
+        &nbsp;<a href="step1.html">2. 业务对接</a>
+        </td><td>
+        &nbsp;<a href="step2.html">3. 旧系统改造</a>
+        </td></tr></table>
+        </p>
+    <p class="style1" style="text-align: center">
+        3.旧系统改造</p>
+    <p>
+        传统的单用户系统改造成saas多租户模式</p>
+    <p>
+        1、工程的整合有两种方案</p>
+    <p>
+        &nbsp;&nbsp;&nbsp;&nbsp; （1）方案一： 把老系统代码迁移到 toSaas源码工程整合成一个工程。 适合代码采用 springboot + 
+        mybatis框架&nbsp;的旧系统。</p>
+    <p>
+        &nbsp;&nbsp;&nbsp;&nbsp; （2）方案二： 分开部署，即toSaas独立部署运行，老系统采用web 
+        api方式调用toSaas接口，但老系统要直接操作数据库时，就要移植toSaas源代码里的mybatis部分代码到老系统工程。</p>
+    <p>
+        2、业务层代码整合</p>
+    <p>
+        &nbsp;&nbsp;&nbsp;&nbsp; 
+        （1）用户系统整合：老系统的用户只考虑单企业（租户），因此要替换成使用toSaas平台的用户系统，使用toSass平台的用户注册、登录、权限等接口。为不影响老系统业务的代码，可以改造toSaas用户接口，把用户数据同步到老系统的用户，保持数据一致性，则老代码的用户相关的代码无需改动。</p>
+    <p>
+        &nbsp;&nbsp;&nbsp;&nbsp; 
+        （2）&nbsp;数据库层操作整合：由于老系统只考虑单数据源连接，toSaas多租户里每一个租户都有自己的数据库。同一台mysql服务器的所有租户共用一个数据库连接池，连接到mysql实例的系统数据库mysql 
+        ，在执行sql语句时由拦截器在表名的前面加上对应的数据库名字。因此数据库操作层代码要替换成toSaas提供的数据库拦截器。</p>
+    <p>
+        &nbsp;&nbsp;&nbsp;&nbsp; （3）&nbsp;全局变量的改造：全局变量通常有2种，static 和 session 变量， static 
+        变量为所有用户共享的变量，如果老系统只考虑给单企业（租户）使用，那就改造成使用redis存储代替。session变量通常为单操作用户的临时存储变量，但在服务器集群的情况下，两次请求可能会分配到不同的服务器，导致session值不同步，因此建议替换成redis存储变量，或者采用其他session集群方案代替。</p>
+    <p>
+        3、系统改造完成，系统交给运维部署发布，恭喜你老系统完美转化成saas平台。</p>
+    <p>
+        <table style="width:400px"><tr><td>
+        &nbsp;<a href="index.html"> 1.系统初始化</a>
+        </td><td>
+        &nbsp;<a href="step1.html">2. 业务对接</a>
+        </td><td>
+        &nbsp;<a href="step2.html">3. 旧系统改造</a>
+        </td></tr></table>
+        </p>
+    <p>
+        </p>
+        
+    <div style="text-align:center; ">
+    <p>QQ:&nbsp;154986287</p><br/>
+    
+        <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=834432198&site=qq&menu=yes">
+		<img  src="images/dqq.jpg">
+        </a>
+    </div>
+</body>
+</html>

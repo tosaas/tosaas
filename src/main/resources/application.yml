@@ -1,0 +1,22 @@
+
+#spring.data.mongodb.uri=mongodb://name:pass@localhost:27017/tosaas
+spring:
+  data:
+    mongodb:
+      database: tosaas
+      hostPort: localhost:27017
+      username:
+      password:
+
+
+
+
+#mybatis
+#配置.xml文件路径
+mybatis:
+  config-locations: classpath:mybatis-config.xml
+  mapper-locations: classpath:mapper/*.xml
+  #配置模型路径
+  type-aliases-package: com.haoyou.tosaas.subdb.model
+  configuration:
+    interceptions: com.haoyou.tosaas.subdb.dynamicds.TableNameReplacer

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>初始化</title>
+    <link href="css/css.css" rel="stylesheet">
+
+    <link href="css/css2.css" rel="stylesheet">
+    <script src="js/jquery-1.11.0.min.js"></script>
+    <style type="text/css">
+        .container
+        {
+            text-align: center;
+        }
+        .style1
+        {
+            text-align: center;
+        }
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            //如果已经初始化，跳转到登录
+            $.ajax({
+                url: "/adminuser/isInit.do",
+                type: "POST",
+                contentType: "application/json;charset=UTF-8",
+                data: "",
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                    //alert(JSON.stringify(data));
+                    if (data.result) {
+                        window.location = 'index.html';
+                    }
+                }
+            });
+        });
+
+        function onSubmit() {
+            if (!$("#company_name").val()) {
+                alert("请输入企业名称");
+                return;
+            }
+            if (!$("#user_pwd").val()) {
+                alert("请输入管理员密码");
+                return;
+            }
+            if ($("#user_pwd").val() != $("#user_pwd2").val()) {
+                alert("确认密码不一致");
+                return;
+            }
+            if (!$("#user_nick").val()) {
+                alert("请输入管理员昵称");
+                return;
+            }
+            if (!$("#user_phone").val()) {
+                alert("请输入管理员手机");
+                return;
+            }
+            if (!$("#mysql_serverip").val()) {
+                alert("请输入mysql服务器");
+                return;
+            }
+            if (!$("#mysql_port").val()) {
+                alert("请输入mysql端口");
+                return;
+            }
+            if (!$("#mysql_username").val()) {
+                alert("请输入mysql用户名");
+                return;
+            }
+            if (!$("#mysql_pwd").val()) {
+                alert("请输入mysql密码");
+                return;
+            }
+            if (!$("#bzdb_name").val()) {
+                alert("请输入数据库名称");
+                return;
+            }
+
+
+            var content = {
+                "content": {
+                    "company_name": $("#company_name").val(),
+                    "user_pwd": $("#user_pwd").val(),
+                    "user_nick": $("#user_nick").val(),
+                    "user_phone": $("#user_phone").val(),
+                    "mysql_serverip": $("#mysql_serverip").val(),
+                    "mysql_port": $("#mysql_port").val(),
+                    "mysql_username": $("#mysql_username").val(),
+                    "mysql_pwd": $("#mysql_pwd").val(),
+                    "bzdb_name": $("#bzdb_name").val()
+                }
+            }
+            $.ajax({
+                url: "/adminuser/init.do",
+                type: "POST",
+                contentType: "application/json;charset=UTF-8",
+                data: JSON.stringify(content),
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                    if (data.success) {
+                        alert("初始化成功");
+                        window.location = 'index.html';
+                    }
+                    else {
+                        alert(JSON.stringify(data));
+                    }
+                }
+            });
+        }
+    </script>
+</head>
+<body class="open-wrapper ">
+<div class="page-wrapper">
+
+    <header class="header" id="header">
+        <div class="style1">
+            系统初始化</div>
+    </header>
+
+    <div style="text-align:center">
+    <table style="width:400px;" border="1" align=center>
+    <tr><td colspan="2" align="center"><strong style="text-align: center">企业信息</strong></td></tr>
+    <tr><td>企业名称：</td><td><input id="company_name" name="company_name" /></td></tr>
+    <tr><td colspan="2" align="center"><strong>账号信息</strong></td></tr>
+    <tr><td>管理员账号：</td><td><input id="user_name" name="user_name" value="admin" readonly=readonly /></td></tr>
+    <tr><td>管理员密码：</td><td><input type="password" id="user_pwd" name="user_pwd" /></td></tr>
+    <tr><td>确认密码：</td><td><input type="password" id="user_pwd2" name="user_pwd2" /></td></tr>
+    <tr><td>管理员昵称：</td><td><input id="user_nick" name="user_nick" /></td></tr>
+    <tr><td>管理员手机：</td><td><input id="user_phone" name="user_phone" /></td></tr>
+    <tr><td colspan="2" align="center"><strong>数据库配置</strong></td></tr>
+    <tr><td>mysql服务器：</td><td><input id="mysql_serverip" name="mysql_serverip" value="127.0.0.1" /></td></tr>
+    <tr><td>端口：</td><td><input id="mysql_port" name="mysql_port" value="3306" /></td></tr>
+    <tr><td>用户名：</td><td><input id="mysql_username" name="mysql_username" /></td></tr>
+    <tr><td>密码：</td><td><input type="password" id="mysql_pwd" name="mysql_pwd" /></td></tr>
+    <tr><td colspan="2" align="center"><strong>业务数据库</strong></td></tr>
+    <tr><td>数据库名称：</td><td><input id="bzdb_name" name="bzdb_name" value="demo" /></td></tr>
+    <tr><td colspan="2" align="center"><input type="button" value="提交" style="width:100px" onclick="return onSubmit();" /></td></tr>
+    </table>
+    </div>
+
+</div>
+</body>
+</html>

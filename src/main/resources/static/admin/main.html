@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>配置信息</title>
+    <link href="css/css.css" rel="stylesheet">
+
+    <link href="css/css2.css" rel="stylesheet">
+    <script src="js/jquery-1.11.0.min.js"></script>
+    
+    <style type="text/css">
+        .container
+        {
+            text-align: center;
+        }
+        .style1
+        {
+            text-align: center;
+        }
+    </style>
+    
+    <script type="text/javascript">
+        var token ;
+        $(function () {
+            var obj=GetRequest();
+            if (!obj.token) {
+                console.log("token=" + obj.token);
+                window.location = 'index.html';
+                return;
+            }
+            token=obj.token;
+            console.log("token="+token);
+            //如果已经初始化，跳转到登录
+            $.ajax({
+                url: "/adminuser/isInit.do",
+                type: "POST",
+                contentType: "application/json;charset=UTF-8",
+                data: "",
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                    //alert(JSON.stringify(data));
+                    if (!data.result) {
+                        window.location = 'init.html';
+                    }
+                    else {
+                        onContent(token);
+                    }
+                }
+            });
+        });
+
+        //获取url参数封装成对象
+        function GetRequest() {
+      
+            var url = location.search; //获取url中"?"符后的字串
+            var theRequest = new Object();
+            if (url.indexOf("?") != -1) {
+                var str = url.substr(1);
+                strs = str.split("&");
+                for(var i = 0; i < strs.length; i ++) {
+                    theRequest[strs[i].split("=")[0]]=decodeURIComponent((strs[i].split("=")[1]));
+                }
+            }
+            return theRequest;
+        }
+
+        function onContent(token) {
+
+            var content = {
+                "token": token
+            }
+            $.ajax({
+                url: "/adminuser/getInitContent.do",
+                type: "POST",
+                contentType: "application/json;charset=UTF-8",
+                data: JSON.stringify(content),
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                    //alert(JSON.stringify(data));
+                    if (data.success) {
+                        $("#content").val(JSON.stringify(data.result));
+                    }
+                    else {
+                        alert(JSON.stringify(data));
+                    }
+                }
+            });
+        }
+
+    </script>
+</head>
+<body class="open-wrapper ">
+<div class="page-wrapper">
+
+    <header class="header" id="header">
+        <div class="style1">
+            配置信息</div>
+    </header>
+    
+    <div style="text-align:center">
+    <textarea id="content" cols="100" rows="30">
+    </textarea>
+    </div>
+</div>
+</body>
+</html>

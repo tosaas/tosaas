@@ -1,0 +1,32 @@
+{
+  "groups": [
+    {
+      "name": "spring.data.mongodb",
+      "type": "com.haoyou.tosaas.centerdb.common.MongoConfig",
+      "sourceType": "com.haoyou.tosaas.centerdb.common.MongoConfig"
+    }
+  ],
+  "properties": [
+    {
+      "name": "spring.data.mongodb.database",
+      "type": "java.lang.String",
+      "sourceType": "com.haoyou.tosaas.centerdb.common.MongoConfig"
+    },
+    {
+      "name": "spring.data.mongodb.host-port",
+      "type": "java.lang.String",
+      "sourceType": "com.haoyou.tosaas.centerdb.common.MongoConfig"
+    },
+    {
+      "name": "spring.data.mongodb.password",
+      "type": "java.lang.String",
+      "sourceType": "com.haoyou.tosaas.centerdb.common.MongoConfig"
+    },
+    {
+      "name": "spring.data.mongodb.username",
+      "type": "java.lang.String",
+      "sourceType": "com.haoyou.tosaas.centerdb.common.MongoConfig"
+    }
+  ],
+  "hints": []
+}

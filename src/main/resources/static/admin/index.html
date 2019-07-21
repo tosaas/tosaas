@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>后台管理</title>
+    <link href="css/css.css" rel="stylesheet">
+
+    <link href="css/css2.css" rel="stylesheet">
+    <script src="js/jquery-1.11.0.min.js"></script>
+    
+    <style type="text/css">
+        .container
+        {
+            text-align: center;
+        }
+        .style1
+        {
+            text-align: center;
+        }
+    </style>
+    
+    <script type="text/javascript">
+        $(function () {
+            //如果已经初始化，跳转到登录
+            $.ajax({
+                url: "/adminuser/isInit.do",
+                type: "POST",
+                contentType: "application/json;charset=UTF-8",
+                data: "",
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                    //alert(JSON.stringify(data));
+                    if (!data.result) {
+                        window.location = 'init.html';
+                    }
+                }
+            });
+        });
+
+
+        function onSubmit() {
+            if (!$("#user_pwd").val()) {
+                alert("请输入管理员密码");
+                return;
+            }
+
+
+            var content = {
+                "content": {
+                    "name": $("#user_name").val(),
+                    "pwd": $("#user_pwd").val()
+                }
+            }
+            $.ajax({
+                url: "/adminuser/login.do",
+                type: "POST",
+                contentType: "application/json;charset=UTF-8",
+                data: JSON.stringify(content),
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                    if (data.success) {
+                        document.location.href = 'main.html?token=' + data.result.token;
+                    }
+                    else {
+                        alert(JSON.stringify(data));
+                    }
+                }
+            });
+        }
+    </script>
+</head>
+<body class="open-wrapper ">
+<div class="page-wrapper">
+
+    <header class="header" id="header">
+        <div class="style1">
+            后台登录</div>
+    </header>
+    
+    <div style="text-align:center">
+    <table style="width:400px;" border="1" align=center>
+    <tr><td>用户名：</td><td><input id="user_name" name="user_name" value="admin" readonly=readonly /></td></tr>
+    <tr><td>密码：</td><td><input type="password" id="user_pwd" name="user_pwd" /></td></tr>
+    <tr><td colspan="2" align="center"><input type="button" value="提交" style="width:100px" onclick="return onSubmit();" /></td></tr>
+    </table>
+    </div>
+</div>
+</body>
+</html>

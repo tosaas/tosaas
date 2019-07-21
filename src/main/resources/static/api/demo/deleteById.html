@@ -1,0 +1,358 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="edge"/>
+    <title>toSaas 接口文档</title>
+    <link href="../css/css.css" rel="stylesheet">
+
+    <link href="../css/css2.css" rel="stylesheet">
+    <script src="../js/jquery-1.11.0.min.js"></script>
+
+</head>
+<body class="open-wrapper ">
+<div class="page-wrapper">
+
+    <header class="header" id="header">
+        <div class="container">
+        </div>
+    </header>
+
+
+    <div class="markdown">
+        <h1 id="title">
+            /demo/deleteById.do<span>(案例：删除记录)</span>
+        </h1>
+        <div id="ant-api">
+            <p>只有新建记录后才能删除记录。</p>
+
+            <h2>请求地址</h2>
+            <table>
+                <tr>
+                    <th>环境</th>
+                    <th>HTTP POST 请求地址</th>
+                </tr>
+                <tr>
+                    <td>正式环境</td>
+                    <td>
+                        https://域名/demo/deleteById.do
+                    </td>
+                </tr>
+            </table>
+
+
+            <h2>请求参数</h2>
+            <table data-view="params">
+                <tr>
+                    <th class="prop-name">参数</th>
+                    <th class="prop-type">类型</th>
+                    <th class="prop-required">是否必填</th>
+                    <th class="prop-max-length">最大长度</th>
+                    <th class="prop-desc">描述</th>
+                    <th class="prop-example">示例值</th>
+                </tr>
+
+
+                <tr data-depth="1">
+                    <td>
+
+                        token
+                    </td>
+                    <td>String</td>
+
+
+                    <td>必选</td>
+
+                    <td>50</td>
+                    <td> 登录令牌</td>
+                    <td> 7752e7b8cff94caf99525a3ad712b82b</td>
+                </tr>
+
+                
+                <tr data-depth="1">
+                    <td>
+
+                        DBID</td>
+                    <td>String</td>
+
+
+                    <td>必选</td>
+
+                    <td>50</td>
+                    <td> 数据库id</td>
+                    <td> 5cfe0c881909675da0884e15</td>
+                </tr>
+
+                
+                <tr>
+                    <td>
+
+                        id&nbsp;</td>
+                    <td>int</td>
+
+
+                    <td>必选</td>
+
+                    <td>&nbsp;</td>
+                    <td> 记录id</td>
+                    <td> 1</td>
+                </tr>
+
+                
+            </table>
+
+
+
+            <h2>响应参数</h2>
+
+
+            <table data-view="params">
+                <tr>
+                    <th class="prop-name">参数</th>
+                    <th class="prop-type">类型</th>
+                    <th class="prop-required">是否必填</th>
+                    <th class="prop-max-length">最大长度</th>
+                    <th class="prop-desc">描述</th>
+                    <th class="prop-example">示例值</th>
+                </tr>
+
+
+                <tr data-depth="1">
+                    <td>
+
+                        success
+                    </td>
+                    <td>boolean</td>
+
+
+                    <td>必填</td>
+
+                    <td>1</td>
+                    <td> true 成功; false 失败</td>
+                    <td> true</td>
+                </tr>
+
+
+                <tr data-depth="1">
+                    <td>
+
+                        code
+                    </td>
+                    <td>String</td>
+
+
+                    <td> 必填</td>
+
+                    <td>4</td>
+                    <td> 错误码&nbsp; 0 正确</td>
+                    <td> 0</td>
+                </tr>
+
+
+                <tr data-depth="1">
+                    <td>massege</td>
+                    <td>String</td>
+
+
+                    <td> 必填</td>
+
+                    <td>50</td>
+                    <td> 错误信息</td>
+                    <td> 成功</td>
+                </tr>
+
+
+                <tr>
+                    <td>result</td>
+                    <td>String</td>
+
+
+                    <td> 选填</td>
+
+                    <td>&nbsp;</td>
+                    <td> &nbsp;</td>
+                    <td> &nbsp;</td>
+                </tr>
+
+
+            </table>
+
+
+            <h2>请求示例</h2>
+
+
+            <div class="demo">
+                <ul class="demo-tab">
+
+                    <li data-id="3" class="">
+                        <a class="title" href="#">HTTP请求源码</a>
+                    </li>
+
+                </ul>
+                <div class="demo-tab-line"></div>
+
+                <div class="demo-list">
+
+                    <div class="code" data-id="0">
+      
+      <pre><code class="java">
+        var content = {
+                "token": "7752e7b8cff94caf99525a3ad712b82b",
+	            "DBID":"5cfe0c881909675da0884e15",
+                "content":{
+		            "id":"1"
+	            }
+            }
+           $.ajax({
+               url: &quot;/demo/deleteById.do&quot;,
+               type: &quot;POST&quot;,
+               contentType: &quot;application/json;charset=UTF-8&quot;,
+               data: JSON.stringify(content),
+               dataType: &quot;json&quot;,
+               success: function (data) {
+                   console.log(data);
+                   alert(JSON.stringify(data));
+               }
+           });
+</code></pre>
+                    </div>
+
+                    <div><input type="button" value="调用测试" onclick="return onDebug();"
+                                style="height: 33px; width: 129px"/></div>
+                    <script type="text/javascript">
+                        function onDebug() {
+                            var content = {
+                                "token": "7752e7b8cff94caf99525a3ad712b82b",
+                                "DBID": "5cfe0c881909675da0884e15",
+                                "content": {
+                                    "id": "1"
+                                }
+                            }
+                            $.ajax({
+                                url: "/demo/deleteById.do",
+                                type: "POST",
+                                contentType: "application/json;charset=UTF-8",
+                                data: JSON.stringify(content),
+                                dataType: "json",
+                                success: function (data) {
+                                    console.log(data);
+                                    alert(JSON.stringify(data));
+                                }
+                            });
+                        }
+                    </script>
+
+                </div>
+            </div>
+
+
+            <h2>响应示例</h2>
+
+            <div class="demo">
+                <ul class="demo-tab">
+
+                    <li data-id="0" class="focus">
+                        <a class="title" href="#">JSON 示例</a>
+                    </li>
+
+                </ul>
+                <div class="demo-tab-line"></div>
+
+                <div class="demo-list">
+
+                    <div class="code" data-id="0">
+      
+      <pre>
+      <code class="json">
+{
+    "code": 0,
+    "success": true,
+    "massege": "成功",
+    "result": null
+}
+</code></pre>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <h2>异常示例</h2>
+
+            <div class="demo">
+                <ul class="demo-tab">
+
+                    <li data-id="0" class="focus">
+                        <a class="title" href="#">JSON 示例</a>
+                    </li>
+
+                </ul>
+                <div class="demo-tab-line"></div>
+
+                <div class="demo-list">
+
+                    <div class="code" data-id="0">
+      
+      <pre><code class="json">
+{
+	&quot;code&quot;: -1,
+	&quot;success&quot;: false,
+	&quot;massege&quot;: &quot;请重新登录！&quot;,
+	&quot;result&quot;: null
+}
+</code></pre>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <h2>错误码</h2>
+
+
+            <table>
+                <tr>
+                    <th>错误码</th>
+                    <th>错误描述</th>
+                    <th>解决方案</th>
+                </tr>
+
+                <tr>
+                    <td>1</td>
+                    <td>参数校验错误</td>
+                    <td>检查参数</td>
+                </tr>
+
+                <tr>
+                    <td>2</td>
+                    <td>业务数据校验错误</td>
+                    <td>修改业务数据</td>
+                </tr>
+
+                <tr>
+                    <td>99</td>
+                    <td>未知异常</td>
+                    <td></td>
+                </tr>
+            </table>
+
+
+        </div>
+
+        <style type="text/css">
+            .iframe-comment {
+                width: 100%;
+                border: 0 none;
+                overflow: hidden;
+            }
+
+            .comment-main {
+                margin-top: 20px;
+            }
+        </style>
+        <div id="comment-main" class="comment-main"></div>
+    </div>
+
+</body>
+</html>
+ 

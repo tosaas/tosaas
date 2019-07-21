@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.haoyou.tosaas.subdb.mapper.IDemoMapper">
+
+    <resultMap id="BaseResultMap" type="com.haoyou.tosaas.subdb.model.Demo">
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+    </resultMap>
+
+
+    <sql id="Base_Column_List">
+		id, name
+	</sql>
+
+
+    <select id="findAll" resultMap="BaseResultMap" parameterType="HashMap">
+		select * from t_demo
+	</select>
+
+    <select id="findById" resultType="com.haoyou.tosaas.subdb.model.Demo"
+            parameterType="java.lang.Integer">
+		select * from  t_demo where id=#{id,jdbcType=INTEGER}
+	</select>
+
+
+    <select id="findByName" parameterType="java.lang.String" resultType="com.haoyou.tosaas.subdb.model.Demo">
+        select * from t_demo
+        where name = #{name}
+    </select>
+
+    <insert id="add" parameterType="com.haoyou.tosaas.subdb.model.Demo">
+        insert into t_demo (
+        <include refid="Base_Column_List" />
+        )
+        values (#{id,jdbcType=INTEGER},
+        #{name,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.haoyou.tosaas.subdb.model.Demo">
+		update t_demo
+		set
+		name=#{name,jdbcType=VARCHAR}
+		where
+		id = #{id,jdbcType=INTEGER}
+	</update>
+    <delete id="deleteById" parameterType="java.lang.Integer">
+		delete from
+		t_demo
+		where
+		id
+		= #{id,jdbcType=INTEGER}
+	</delete>
+
+    <delete id="deleteAll" >
+		delete from
+		t_demo
+	</delete>
+
+
+</mapper>
