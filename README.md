@@ -1,16 +1,18 @@
 # tosaas
 
 #### Description
-{**When you're done, you can delete the content in this README and update the file with details for others getting started with your repository**}
+tosaas 开发框架是一款通用的 saas 开发框架，能快速的将传统单企业应用转化成saas多租户模式，支持大数据存储高并发访问，支持无限水平扩展存储服务器、应用服务器数量，经受过百万级用户的实际应用考验。
 
 #### Software Architecture
-Software architecture description
+springboot 
+maven
+mybatis
+mongodb
+redis
 
 #### Installation
 
-1. xxxx
-2. xxxx
-3. xxxx
+1. 使用 idea 导入 maven工程
 
 #### Instructions
 
